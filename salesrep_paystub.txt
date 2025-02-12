@@ -1,0 +1,19 @@
+Sales Representative Payroll Summary
+
+-------------------
+
+Sales Representative: Sandy Jones
+ - Salary: $78800.0
+
+Sales Representative: Annakay Simpson
+ - Salary: $71250.0
+
+Sales Representative: Simon Sayas
+ - Salary: $93010.0
+
+Sales Representative: Onika Walker
+ - Salary: $103300.0
+
+Sales Representative: Jermain Campbell
+ - Salary: $83300.0
+

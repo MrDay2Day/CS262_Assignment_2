@@ -1,0 +1,7 @@
+Manager Payroll Summary
+
+-------------------
+
+Manager: Dwight Thorpe
+ - Salary: $215250.0
+
