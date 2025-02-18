@@ -7,7 +7,6 @@ public class Manager extends StaffMember {
         this.bonus = _bonus;
     }
 
-
     /**
      * 6. Demonstrating Polymorphism (4 Marks)
      * o Override the display() method in both the Manager and SalesRep subclasses to display

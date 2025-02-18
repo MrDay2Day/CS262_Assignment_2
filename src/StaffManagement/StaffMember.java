@@ -1,6 +1,6 @@
 package StaffManagement;
 
-abstract class StaffMember {
+public abstract class StaffMember {
     public String firstName;
     public String lastName;
     protected DeptNumbers deptNumber;
