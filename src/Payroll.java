@@ -1,44 +1,73 @@
 import StaffManagement.DeptNumbers;
 import StaffManagement.Manager;
 import StaffManagement.SalesRep;
+import StaffManagement.StaffMember;
+import utils.PayStubPrintOut;
 
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.util.ArrayList;
 
 /**
- * 2. Testing with Payroll Class (1 Mark)
+ * QUESTION 1. Class Implementation (20 Marks)
+ * o Implement each class as per the provided UML diagram, ensuring that relationships and
+ * access specifiers are appropriately set to private or protected, where applicable.
+ * o Define a parameterized constructor for each class.
+ * o Implement appropriate getter and setter methods for all attributes.
+ * o Each class must include a display() method that outputs all attribute values, including
+ * inherited attributes.
+ *
+ * File Structure
+ *      /src/
+ *          /StaffManagement/
+ *              - DeptNumbers.java (ENUM String values)
+ *              - Manager.java
+ *              - SalesRep.java
+ *              - StaffMember.java
+ *          /utils/
+ *              PayStubPrintOut.java (Utility functions to print out pay stubs to .txt file)
+ *          - Payroll.java (Main class for the application)
+ * --
+ * QUESTION 2. Testing with Payroll Class (1 Mark)
  * o Create a class named Payroll to serve as the Main class for the application.
  */
 public class Payroll {
     public static void main(String[] args) {
 
         /*
-         * 3. Object Instantiation and Display (1 Mark)
+         * QUESTION 3. Object Instantiation and Display (1 Mark)
          * o Within the Payroll class, instantiate an object of the StaffMember class using its
          * constructor.
          * o Invoke the display() method on this object to print the StaffMember data values.
          */
-//        StaffMember regular_staff_1 = new StaffMember("John", "Brown", DeptNumbers.REG0463, 43);
-//        regular_staff_1.display();
+       StaffMember regular_staff_1 = new StaffMember("John", "Brown", DeptNumbers.REG0463, 43) {
+           @Override
+           protected double calculateSalary() {
+               return 0;
+           }
+       };
+        regular_staff_1.display();
+
+        System.out.println("\n\n\n");
 
         /*
-         * 4. Creating a List of Sales Representatives (4 Marks)
+         * QUESTION 4. Creating a List of Sales Representatives (4 Marks)
          * o Declare an ArrayList to store five SalesRep objects.
          * o Populate the list with five SalesRep instances.
          */
         ArrayList<SalesRep> salesReps = buildSalesRepArrayList();
         /*
-         * 5. Displaying Sales Representatives (6 Marks)
+         * QUESTION 5. Displaying Sales Representatives (6 Marks)
          * o Iterate through the ArrayList and invoke the display() method for each SalesRep
          * object.
          */
         for(SalesRep rep : salesReps){
+            System.out.println();
             rep.display();
         }
+        System.out.println("\n\n\n");
 
         /*
-         * 7. Implementing an Abstract Salary Calculation Method (10 Marks)
+         * QUESTION 7. Implementing an Abstract Salary Calculation Method (10 Marks)
          * o Declare an abstract method named calculateSalary() in the StaffMember class that
          * returns a double.
          * o Implement the calculateSalary() method in each subclass to compute and display
@@ -48,23 +77,50 @@ public class Payroll {
          * o Since abstract methods require the class to be abstract, the StaffMember class must be
          * marked as abstract.
          */
-        Manager manager_1 = new Manager("Dwight","Thorpe", DeptNumbers.ICT645, 63.5, 120000 );
+        Manager manager_1 = new Manager("Dwight",
+                "Thorpe",
+                DeptNumbers.ICT645,
+                63.5,
+                120000 );
         SalesRep salesRep_1 = new SalesRep("Patrick", "Tate", DeptNumbers.SAL546, 45.89, 75000);
+
+        System.out.println("\n\n\n");
+
+        /**
+         * QUESTION 6. Demonstrating Polymorphism (4 Marks)
+         * o Override the display() method in both the Manager and SalesRep subclasses to display
+         * additional attributes specific to each subclass.
+         * o Demonstrate polymorphism within the Payroll class by calling the overridden display()
+         * methods.
+         */
+        manager_1.display();
+        System.out.println();
+        salesRep_1.display();
+
+
+        System.out.println("\n\n\n");
+
+
+
         /*
-         * 8. Displaying Salaries (4 Marks)
+         * QUESTION 8. Displaying Salaries (4 Marks)
          * o In the Payroll class, instantiate objects of Manager and SalesRep.
          * o Call the calculateSalary() method for each and display the computed salary.
          */
+
+
         System.out.println("Salary for Manager $" + manager_1.calculateSalary());
         System.out.println("Salary for Sales Representative $" + salesRep_1.calculateSalary());
 
 
+        System.out.println("\n\n\n");
+
         /*
-         * 9. Generate Paystubs
+         * QUESTION 9. Generate Paystubs
          * o Generate a paystub file that will show salary information for each employee on the Payroll.
          */
-        generateManagerPayStub(manager_1);
-        generateSalesRepPayStub(salesReps);
+        PayStubPrintOut.generateManagerPayStub(manager_1); // 1 Manage are a time.
+        PayStubPrintOut.generateSalesRepPayStub(salesReps); // ArrayList of Sale's Rep.
     }
 
     public static ArrayList<SalesRep> buildSalesRepArrayList(){
@@ -88,34 +144,6 @@ public class Payroll {
         return arrayListOfSalesRep;
     }
 
-    public static void generateManagerPayStub(Manager manager) {
-        try (FileWriter writer = new FileWriter("manager_paystub.txt")) {
-            writer.write("Manager Payroll Summary\n");
-            writer.write("\n-------------------\n\n");
-            writer.write("Manager: " + manager.firstName + " " + manager.lastName +  "\n" +
-                    " - Salary: $" + manager.calculateSalary() + "\n" +
-                    "\n");
 
-            System.out.println("Pay stub generated successfully.");
-        } catch (Exception e) {
-            System.out.println("Error writing pay stub file.");
-        }
-    }
-
-    public static void generateSalesRepPayStub(ArrayList<SalesRep> salesReps) {
-        try (FileWriter writer = new FileWriter("salesrep_paystub.txt")) {
-            writer.write("Sales Representative Payroll Summary\n");
-            writer.write("\n-------------------\n\n");
-            for (SalesRep sr : salesReps) {
-                writer.write("Sales Representative: " + sr.firstName + " " + sr.lastName +  "\n" +
-                        " - Salary: $" + sr.calculateSalary() + "\n" +
-                        "\n");
-            }
-
-            System.out.println("Pay stub generated successfully.");
-        } catch (Exception e) {
-            System.out.println("Error writing pay stub file.");
-        }
-    }
 }
 

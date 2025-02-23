@@ -1,24 +1,44 @@
+/**
+ * This package contains classes related to staff management.
+ */
 package StaffManagement;
 
+/**
+ * Represents a Sales Representative, a subclass of StaffMember.
+ * Includes additional attributes such as an allowance.
+ */
 public class SalesRep extends StaffMember {
-    protected double allowance;
+
+    /** The allowance amount for the sales representative. */
+    private final double allowance;
+
+    /**
+     * Constructs a SalesRep with the specified details.
+     *
+     * @param _firstName The first name of the sales representative.
+     * @param _lastName The last name of the sales representative.
+     * @param _deptNumber The department number the sales representative belongs to.
+     * @param _hoursWorked The number of hours worked by the sales representative.
+     * @param _allowance The allowance amount for the sales representative.
+     */
     public SalesRep(String _firstName, String _lastName, DeptNumbers _deptNumber, double _hoursWorked, double _allowance) {
         super(_firstName, _lastName, _deptNumber, _hoursWorked);
         this.allowance = _allowance;
     }
+
     /**
-     * 6. Demonstrating Polymorphism (4 Marks)
-     * o Override the display() method in both the Manager and SalesRep subclasses to display
-     * additional attributes specific to each subclass.
-     * o Demonstrate polymorphism within the Payroll class by calling the overridden display()
-     * methods
-     * @return double
+     * Calculates the salary of the sales representative.
+     *
+     * @return The calculated salary of the sales representative including the allowance.
      */
     @Override
     public double calculateSalary() {
-        return  (this.hoursWorked * 1500) + this.allowance;
+        return  (this.getHoursWorked() * 1500) + this.allowance;
     }
 
+    /**
+     * Displays the details of the sales representative, including allowance.
+     */
     @Override
     public void display() {
         System.out.println("Staff Type: Sales Representative");
